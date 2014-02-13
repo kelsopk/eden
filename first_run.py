@@ -38,7 +38,13 @@ def add_user():
         print "wow: User was succesfully created"
 
 def set_card():
-        
+    try:
+        item = models.Setting.get(models.Setting.name=='card_number')
+        print "Current card_number %s" % item.value 
+    except models.Setting.DoesNotExist:
+        item = models.Setting(name='card_number')
+    
+       
     card_number, integer = False, False
     
     while not (card_number and len(str(card_number)) == 10 and integer):
@@ -48,11 +54,10 @@ def set_card():
             integer = False
         else:
             integer = True
-    
-    try:
-        models.Setting.update(value=card_number).where(models.Setting.name=='card_number')
-    except models.Setting.DoesNotExist:
-        models.Setting.create(name='card_number', value=card_number)
+        
+    item.value = card_number
+    item.save()
+
         
     
 def first():
@@ -84,8 +89,6 @@ if __name__ == "__main__":
             CMDS[sys.argv[1]][1]()
         except KeyError:
             print "so unfamiliar: Command not found!"
-        except:
-            print "wow: %s" % sys.exc_info()[1]
-            
+
         
 
