@@ -6,7 +6,9 @@ from peewee import DateTimeField, FloatField, CharField
 
 class Balance(db.Model):
     when = DateTimeField()
+    balance = FloatField()
     value = FloatField()
+    comment = CharField()
 
 class Setting(db.Model):
     name = CharField()
