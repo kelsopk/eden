@@ -29,7 +29,7 @@ def add_user():
         password = getpass.getpass("Please your password: ")
          
     try:
-        user = User(username=username)
+        user = models.User(username=username)
         user.set_password(password)
         user.save()
     except IntegrityError:

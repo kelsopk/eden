@@ -9,6 +9,9 @@ class Balance(db.Model):
     balance = FloatField()
     value = FloatField()
     comment = CharField()
+    
+    def get_balance(self):
+        self.__class__.select().order_by(self.__class__.id.desc()).get()
 
 class Setting(db.Model):
     name = CharField()
