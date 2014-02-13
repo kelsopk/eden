@@ -8,10 +8,10 @@ class Balance(db.Model):
     when = DateTimeField()
     balance = FloatField()
     value = FloatField()
-    comment = CharField()
+    comment = CharField(null=True)
     
     def get_balance(self):
-        self.__class__.select().order_by(self.__class__.id.desc()).get()
+        return self.__class__.select().order_by(self.__class__.id.desc()).get().balance
 
 class Setting(db.Model):
     name = CharField()
